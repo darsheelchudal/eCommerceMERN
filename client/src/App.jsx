@@ -9,7 +9,7 @@ function App() {
     <>
       <Header />
       <h1 className="text font-bold underline">Hello world!</h1>
-    <Footer />
+      <Footer />
     </>
   );
 }
