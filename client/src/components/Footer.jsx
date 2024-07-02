@@ -4,7 +4,7 @@ function Footer() {
   const currentDate = new Date().getFullYear();
   return (
     <>
-      <div className="bg-slate-900 p-2 text-white mb-0">
+      <div className="bg-slate-900 p-2 text-white fixed bottom-0 w-full">
         <h1 className="footer text-center">DarsheelTshirt @{currentDate}</h1>
       </div>
     </>
