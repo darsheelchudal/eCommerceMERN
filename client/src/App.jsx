@@ -1,11 +1,12 @@
-import { useState } from "react";
 import { Router, Route, Routes } from "react-router-dom";
-function App() {
-  const [count, setCount] = useState(0);
+import Header from "./components/Layout/Header";
+import Footer from "./components/Layout/Footer";
 
+function App() {
   return (
     <>
-      <h1 className="text-2xl font-bold underline">Hello world!</h1>
+      <Header />
+      <Footer />
     </>
   );
 }
