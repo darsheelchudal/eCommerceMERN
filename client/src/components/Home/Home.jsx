@@ -22,7 +22,7 @@ function Home() {
     <>
       <Categories />
       <div className="w-full flex justify-center">
-        <div className="w-[85%]">
+        <div className="w-max">
           <CarouselSlider slides={slides} />
         </div>
       </div>

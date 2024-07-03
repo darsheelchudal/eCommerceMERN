@@ -6,28 +6,30 @@ import { FaRegUserCircle } from "react-icons/fa";
 function Header() {
   return (
     <>
-      <div className="p-6">
-        <div className="flex justify-evenly items-center">
+      <div className="p-6 bg-blue-600 text-white">
+        <div className="flex justify-around items-center">
           <div>
             <h1 className="text-2xl font-semibold">DMarket</h1>
           </div>
           <div className="relative">
-            <CiSearch className="sm:block hidden absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            <CiSearch className="sm:block hidden absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-800" />
             <input
               type="text"
               name=""
-            id=""
+              id=""
               className="sm:block hidden bg-slate-100 w-[350px] p-2 px-8 outline-none rounded-lg"
               placeholder="Search for Products, Brands and More"
             />
           </div>
           <div className="flex gap-x-2 items-center">
-            <FaRegUserCircle size={30} />
-            <h2>Login</h2>
-          </div>
-          <div className="flex gap-x-2 items-center">
-            <IoCartOutline size={30} />
-            <h2>Cart </h2>
+            <div className="flex gap-x-4 items-center">
+              <FaRegUserCircle size={30} />
+              <h2>Login</h2>
+            </div>
+            <div className="flex gap-x-4 items-center">
+              <IoCartOutline size={30} />
+              <h2>Cart </h2>
+            </div>
           </div>
         </div>
       </div>

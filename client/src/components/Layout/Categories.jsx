@@ -20,14 +20,14 @@ const categories = [
 ];
 
 const CategoryItem = ({ src, label }) => (
-  <div className="flex justify-center flex-col items-center p-2">
+  <div className="flex justify-around flex-col items-center p-2">
     <img src={src} alt={label} className="h-20" />
     <h1 className="font-semibold text-center leading-tight">{label}</h1>
   </div>
 );
 
 const CategoryList = () => (
-  <div className="flex flex-wrap justify-evenly px-10 overflow-x-auto items-center">
+  <div className="flex flex-wrap justify-between px-20 overflow-x-auto items-center w-full">
     {categories.map((category, index) => (
       <CategoryItem key={index} src={category.src} label={category.label} />
     ))}
@@ -36,7 +36,7 @@ const CategoryList = () => (
 
 function Categories() {
   return (
-    <div>
+    <div className="w-full bg-slate-50">
       <CategoryList />
     </div>
   );
