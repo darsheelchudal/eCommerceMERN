@@ -1,10 +1,11 @@
 import React from "react";
-import Header from "../Layout/Header";
+import Categories from "../Layout/Categories";
 
 function Home() {
   return (
     <>
-      <div></div>
+      <div className="my-2 bg-slate-700 w-full h-max"></div>
+      <Categories />
     </>
   );
 }
