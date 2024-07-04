@@ -21,7 +21,7 @@ const categories = [
 
 const CategoryItem = ({ src, label }) => (
   <div className="flex justify-around flex-col items-center p-2">
-    <img src={src} alt={label} className="h-20" />
+    <img src={src} alt={label} className="h-16 rounded-full" />
     <h1 className="font-semibold text-center leading-tight">{label}</h1>
   </div>
 );

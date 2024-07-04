@@ -10,7 +10,9 @@ function Header() {
       <div className="p-3 bg-blue-600 text-white">
         <div className="flex justify-around items-center">
           <div>
-            <h1 className="text-2xl font-semibold">DMarket</h1>
+            <Link to="/">
+              <h1 className="text-2xl font-semibold">DMarket</h1>
+            </Link>
           </div>
           <div className="relative">
             <CiSearch className="sm:block hidden absolute left-2 top-1/2 transform -translate-y-1/2 text-blue-800" />
