@@ -23,12 +23,13 @@ function Header() {
             />
           </div>
           <div className="flex gap-x-6 items-center">
-            <div className="flex gap-x-2 items-center">
-              <Link to="/login">
+            {" "}
+            <Link to="/login">
+              <div className="flex gap-x-2 items-center">
                 <FaRegUserCircle size={30} />
                 <h2>Login</h2>
-              </Link>
-            </div>
+              </div>
+            </Link>
             <div className="flex gap-x-2 items-center">
               <IoCartOutline size={30} />
               <h2>Cart </h2>
