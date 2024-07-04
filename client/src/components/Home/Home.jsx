@@ -13,32 +13,32 @@ function Home() {
     <img
       src={Offer8}
       alt="Offer 8"
-      className="h-[250px] w-full object-cover"
+      className="h-[300px] w-full object-cover"
     />,
     <img
       src={Offer1}
       alt="Offer 1"
-      className="h-[250px] w-full object-cover"
+      className="h-[300px] w-full object-cover"
     />,
     <img
       src={Offer2}
       alt="Offer 2"
-      className="h-[250px] w-full object-cover"
+      className="h-[300px] w-full object-cover"
     />,
     <img
       src={Offer3}
       alt="Offer 3"
-      className="h-[250px] w-full object-cover"
+      className="h-[300px] w-full object-cover"
     />,
     <img
       src={Offer5}
       alt="Offer 5"
-      className="h-[250px] w-full object-cover"
+      className="h-[300px] w-full object-cover"
     />,
     <img
       src={Offer7}
       alt="Offer 7"
-      className="h-[250px] w-full object-cover"
+      className="h-[300px] w-full object-cover"
     />,
   ];
 
