@@ -27,7 +27,7 @@ function CarouselSlider({ slides }) {
   };
 
   return (
-    <div className="relative my-4 overflow-hidden">
+    <div className="relative my-2 overflow-hidden">
       <div
         className="flex transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
