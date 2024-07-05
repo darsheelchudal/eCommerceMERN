@@ -4,9 +4,16 @@ import { useState } from "react";
 
 function Login() {
   const [previewSrc, setPreviewSrc] = useState(
-    "https://lh3.googleusercontent.com/a-/AFdZucpC_6WFBIfaAbPHBwGM9z8SxyM1oV4wB4Ngwp_UyQ=s96-c"
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TgOv9CMmsUzYKCcLGWPvqcpUk6HXp2mnww&s"
   );
 
+  const [formData, setFormData] = useState({
+    profile_image: "",
+    fullName: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
   const loadFile = (event) => {
     const input = event.target;
     const file = input.files[0];
@@ -15,10 +22,22 @@ function Login() {
       setPreviewSrc(URL.createObjectURL(file));
     }
   };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    console.log(formData);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("here");
+  };
   return (
     <>
       <div className="flex justify-center items-center">
-        <div className="card flex h-[700px] bg-white my-8">
+        <div className="card flex h-[750px] bg-white my-8">
           <div className="poster w-[300px] bg-blue-500 text-white p-8 flex flex-col gap-y-4 overflow-hidden">
             <h1 className="font-bold text-xl">Looks like you're new here!</h1>
             <h2 className="font-semibold">
@@ -30,6 +49,7 @@ function Login() {
               action=""
               className="flex flex-col space-y-8"
               encType="multipart/form-data"
+              onSubmit={handleSubmit}
             >
               <div className="shrink-0 mx-10">
                 <img
@@ -56,26 +76,29 @@ function Login() {
               </label>
               <input
                 type="text"
-                name=""
-                id=""
+                name="fullName"
+                id="fullName"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Full Name *"
+                onChange={handleChange}
               />
 
               <input
                 type="email"
-                name=""
-                id=""
+                name="email"
+                id="email"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Email *"
+                onChange={handleChange}
               />
 
               <input
                 type="password"
-                name="cpassword"
-                id="cpassword"
+                name="password"
+                id="password"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Password *"
+                onChange={handleChange}
               />
               <input
                 type="password"
@@ -83,6 +106,7 @@ function Login() {
                 id="cpassword"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Confirm Password *"
+                onChange={handleChange}
               />
 
               <button className="flex justify-center bg-orange-500 text-white p-3 rounded-sm font-medium">
