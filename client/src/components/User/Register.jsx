@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 function Login() {
   const [previewSrc, setPreviewSrc] = useState(
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TgOv9CMmsUzYKCcLGWPvqcpUk6HXp2mnww&s"
   );
+
+  const { register, handleSubmit } = useForm();
 
   const [formData, setFormData] = useState({
     profile_image: "",
@@ -22,18 +25,21 @@ function Login() {
       setPreviewSrc(URL.createObjectURL(file));
     }
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
+  };
+  useEffect(() => {
     console.log(formData);
+  }, [formData]);
+  const userSubmit = (data) => {
+    console.log(data);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("here");
-  };
+
   return (
     <>
       <div className="flex justify-center items-center">
@@ -49,7 +55,7 @@ function Login() {
               action=""
               className="flex flex-col space-y-8"
               encType="multipart/form-data"
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(userSubmit)}
             >
               <div className="shrink-0 mx-10">
                 <img
@@ -76,7 +82,7 @@ function Login() {
               </label>
               <input
                 type="text"
-                name="fullName"
+                {...register("fullName", { required: true })}
                 id="fullName"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Full Name *"
@@ -85,7 +91,7 @@ function Login() {
 
               <input
                 type="email"
-                name="email"
+                {...register("email", { required: true })}
                 id="email"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Email *"
@@ -94,7 +100,7 @@ function Login() {
 
               <input
                 type="password"
-                name="password"
+                {...register("password", { required: true })}
                 id="password"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Password *"
@@ -102,7 +108,7 @@ function Login() {
               />
               <input
                 type="password"
-                name="cpassword"
+                {...register("cpassword", { required: true })}
                 id="cpassword"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Confirm Password *"
