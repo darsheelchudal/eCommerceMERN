@@ -16,15 +16,15 @@ function Login() {
             <form action="" className="flex flex-col space-y-8">
               <input
                 type="email"
-                name=""
-                id=""
+                name="email"
+                id="email"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Email *"
               />
               <input
                 type="password"
-                name=""
-                id=""
+                name="password"
+                id="password"
                 className="border-2 p-3 rounded-lg"
                 placeholder="Password *"
               />
