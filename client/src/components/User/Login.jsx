@@ -5,8 +5,8 @@ function Login() {
   return (
     <>
       <div className="flex justify-center items-center">
-        <div className="card flex h-[500px] bg-white my-8">
-          <div className="poster w-[300px] bg-blue-500 text-white p-8 flex flex-col gap-y-4 overflow-hidden">
+        <div className="card flex bg-white my-8">
+          <div className="poster w-[300px] bg-blue-500 text-white p-10 flex flex-col gap-y-4 overflow-hidden">
             <h1 className="font-bold text-xl">Login </h1>
             <h2 className="font-semibold">
               Get access to your Orders, Wishlist and Recommendations

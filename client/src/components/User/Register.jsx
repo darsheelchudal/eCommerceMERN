@@ -43,7 +43,7 @@ function Login() {
   return (
     <>
       <div className="flex justify-center items-center">
-        <div className="card flex h-[750px] bg-white my-8">
+        <div className="card flex bg-white my-8">
           <div className="poster w-[300px] bg-blue-500 text-white p-8 flex flex-col gap-y-4 overflow-hidden">
             <h1 className="font-bold text-xl">Looks like you're new here!</h1>
             <h2 className="font-semibold">
