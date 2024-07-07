@@ -31,6 +31,7 @@ function Login() {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
+      [file]: value,
     }));
   };
   useEffect(() => {
@@ -43,7 +44,7 @@ function Login() {
   return (
     <>
       <div className="flex justify-center items-center">
-        <div className="card flex bg-white my-8">
+        <div className="card flex bg-white h-[800px] my-8">
           <div className="poster w-[300px] bg-blue-500 text-white p-8 flex flex-col gap-y-4 overflow-hidden">
             <h1 className="font-bold text-xl">Looks like you're new here!</h1>
             <h2 className="font-semibold">
@@ -54,7 +55,7 @@ function Login() {
             <form
               action=""
               className="flex flex-col space-y-8"
-              encType="multipart/form-data"
+              enctype="multipart/form-data"
               onSubmit={handleSubmit(userSubmit)}
             >
               <div className="shrink-0 mx-10">
@@ -71,6 +72,7 @@ function Login() {
                 <input
                   type="file"
                   onChange={loadFile}
+                  name="profile_image"
                   className="block w-full text-sm text-slate-500
               file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0
