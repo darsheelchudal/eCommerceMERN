@@ -8,23 +8,23 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "./uploads");
+    cb(null, "uploads/");
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage, limits: { fileSize: 1024 * 1024 * 5 } });
 
 router.post("/register", upload.single("profile_image"), async (req, res) => {
   const { fullName, email, password } = req.body;
-  const { profile_image } = req.file.path;
+  const profile_image = req.file.path;
 
   try {
-    let user = User.findOne({ email });
+    let user = await User.findOne({ email });
     if (user) {
-      return res.status("User already exists");
+      return res.status(400).json({ message: "User already exists" });
     }
 
     user = new User({
