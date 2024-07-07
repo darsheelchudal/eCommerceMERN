@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userRegisterApi = createApi({
   reducerPath: "user",
@@ -16,4 +16,4 @@ export const userRegisterApi = createApi({
   }),
 });
 
-export const { useRegisterUserMutation } = userRegister;
+export const { useRegisterUserMutation } = userRegisterApi;
