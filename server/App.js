@@ -1,18 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
-import multer from "multer";
-
+import path from "path";
+import userRouter from "./routes/User.routes.js";
+//server
 const app = express();
-
-app.use(cors());
-app.use(express.json());
-
 const PORT = 8000;
 const MONGO_URI =
   "mongodb+srv://darsheelchudal11:darsheel@cluster0.i4rjtg0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const db = async () => {
+//Middlwares
+app.use(express.json());
+app.use(cors());
+app.use("/uploads", express.static(path.join("uploads")));
+
+const connectDB = async () => {
   try {
     await mongoose.connect(MONGO_URI);
     console.log("Connected to Mongoose");
@@ -20,11 +22,13 @@ const db = async () => {
     console.log("Error", err);
   }
 };
-db();
+connectDB();
 
+//Routes
 app.get("/", (req, res) => {
   res.send("Hello world");
 });
+app.use("/api/user", userRouter);
 
 app.listen(PORT, () => {
   console.log(`Listening on PORT ${PORT}`);
