@@ -2,21 +2,27 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { useRegisterUserMutation } from "../../services/user/userRegister";
+import { updateFormData, resetFormData } from "../../features/auth/userSlice";
 
 function Login() {
   const [previewSrc, setPreviewSrc] = useState(
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TgOv9CMmsUzYKCcLGWPvqcpUk6HXp2mnww&s"
   );
-
+  const dispatch = useDispatch();
+  const formData = useSelector((state) => state.user.formData);
   const { register, handleSubmit } = useForm();
+  const [registerUser, { isLoading, isSuccess, isError, error }] =
+    useRegisterUserMutation();
 
-  const [formData, setFormData] = useState({
-    profile_image: "",
-    fullName: "",
-    email: "",
-    password: "",
-    cpassword: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   profile_image: "",
+  //   fullName: "",
+  //   email: "",
+  //   password: "",
+  //   cpassword: "",
+  // });
   const loadFile = (event) => {
     const input = event.target;
     const file = input.files[0];
@@ -28,17 +34,17 @@ function Login() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-      [file]: value,
-    }));
+    dispatch(updateFormData({ [name]: value }));
   };
+  // useEffect(() => {
+  //   console.log(formData);
+  // }, [formData]);
   useEffect(() => {
     console.log(formData);
   }, [formData]);
-  const userSubmit = (data) => {
-    console.log(data);
+  const userSubmit = async (data) => {
+    await registerUser(formData);
+    dispatch(resetFormData());
   };
 
   return (
@@ -55,7 +61,7 @@ function Login() {
             <form
               action=""
               className="flex flex-col space-y-8"
-              enctype="multipart/form-data"
+              encType="multipart/form-data"
               onSubmit={handleSubmit(userSubmit)}
             >
               <div className="shrink-0 mx-10">
@@ -124,6 +130,11 @@ function Login() {
                 <Link to="/login">Already have an account? Log in</Link>
               </span>
             </form>
+            <div className="message text-center my-4 text-red-700 font-semibold">
+              {isLoading && <p>Loading...</p>}
+              {isSuccess && <p>Registration successful!</p>}
+              {isError && <p>Error: {error.message}</p>}
+            </div>
           </div>
         </div>
       </div>
