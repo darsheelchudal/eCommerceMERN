@@ -17,7 +17,7 @@ export const userSlice = createSlice({
     updateFormData: (state, action) => {
       state.formData = { ...state.formData, ...action.payload };
     },
-    resetFormData: (state, action) => {
+    resetFormData: (state) => {
       state.formData = initialState.formData;
     },
   },

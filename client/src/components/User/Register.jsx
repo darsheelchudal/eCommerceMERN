@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "../../services/user/userRegister";
 import { updateFormData, resetFormData } from "../../features/auth/userSlice";
 
-function Login() {
+function Register() {
   const [previewSrc, setPreviewSrc] = useState(
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TgOv9CMmsUzYKCcLGWPvqcpUk6HXp2mnww&s"
   );
@@ -16,19 +16,13 @@ function Login() {
   const [registerUser, { isLoading, isSuccess, isError, error }] =
     useRegisterUserMutation();
 
-  // const [formData, setFormData] = useState({
-  //   profile_image: "",
-  //   fullName: "",
-  //   email: "",
-  //   password: "",
-  //   cpassword: "",
-  // });
   const loadFile = (event) => {
     const input = event.target;
     const file = input.files[0];
 
     if (file) {
       setPreviewSrc(URL.createObjectURL(file));
+      dispatch(updateFormData({ profile_image: file }));
     }
   };
 
@@ -36,12 +30,11 @@ function Login() {
     const { name, value } = e.target;
     dispatch(updateFormData({ [name]: value }));
   };
-  // useEffect(() => {
-  //   console.log(formData);
-  // }, [formData]);
+
   useEffect(() => {
     console.log(formData);
   }, [formData]);
+
   const userSubmit = async (data) => {
     await registerUser(formData);
     dispatch(resetFormData());
@@ -142,4 +135,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
