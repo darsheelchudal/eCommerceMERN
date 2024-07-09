@@ -19,8 +19,7 @@ const upload = multer({ storage, limits: { fileSize: 1024 * 1024 * 5 } });
 
 router.post("/register", upload.single("profile_image"), async (req, res) => {
   const { fullName, email, password } = req.body;
-  const profile_image = req.file.path;
-
+  const profile_image = req.file?.path;
   try {
     let user = await User.findOne({ email });
     if (user) {

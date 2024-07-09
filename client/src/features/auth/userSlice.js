@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   formData: {
-    profile_image: "",
+    profile_image: null,
     fullName: "",
     email: "",
     password: "",
@@ -23,6 +23,8 @@ export const userSlice = createSlice({
   },
 });
 
-export default userSlice.reducer;
-
 export const { updateFormData, resetFormData } = userSlice.actions;
+
+export const selectFormData = (state) => state.user.formData;
+
+export default userSlice.reducer;

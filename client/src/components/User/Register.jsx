@@ -1,43 +1,64 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSelector, useDispatch } from "react-redux";
 import { useRegisterUserMutation } from "../../services/user/userRegister";
-import { updateFormData, resetFormData } from "../../features/auth/userSlice";
 
 function Register() {
+  const [formData, setFormData] = useState({
+    profile_image: null,
+    fullName: "",
+    email: "",
+    password: "",
+    cpassword: "",
+  });
   const [previewSrc, setPreviewSrc] = useState(
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TgOv9CMmsUzYKCcLGWPvqcpUk6HXp2mnww&s"
   );
-  const dispatch = useDispatch();
-  const formData = useSelector((state) => state.user.formData);
   const { register, handleSubmit } = useForm();
   const [registerUser, { isLoading, isSuccess, isError, error }] =
     useRegisterUserMutation();
 
   const loadFile = (event) => {
-    const input = event.target;
-    const file = input.files[0];
-
+    const file = event.target.files[0];
     if (file) {
+      setFormData({ ...formData, profile_image: file });
       setPreviewSrc(URL.createObjectURL(file));
-      dispatch(updateFormData({ profile_image: file }));
     }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    dispatch(updateFormData({ [name]: value }));
+    setFormData({ ...formData, [name]: value });
   };
 
   useEffect(() => {
     console.log(formData);
   }, [formData]);
 
-  const userSubmit = async (data) => {
-    await registerUser(formData);
-    dispatch(resetFormData());
+  const userSubmit = async () => {
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append("profile_image", formData.profile_image);
+    formDataToSubmit.append("fullName", formData.fullName);
+    formDataToSubmit.append("email", formData.email);
+    formDataToSubmit.append("password", formData.password);
+    formDataToSubmit.append("cpassword", formData.cpassword);
+
+    try {
+      await registerUser(formDataToSubmit);
+      // Reset form data after successful registration
+      setFormData({
+        profile_image: null,
+        fullName: "",
+        email: "",
+        password: "",
+        cpassword: "",
+      });
+      setPreviewSrc(
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2TgOv9CMmsUzYKCcLGWPvqcpUk6HXp2mnww&s"
+      );
+    } catch (error) {
+      console.error("Registration Error:", error);
+    }
   };
 
   return (
@@ -88,6 +109,7 @@ function Register() {
                 className="border-2 p-3 rounded-lg"
                 placeholder="Full Name *"
                 onChange={handleChange}
+                value={formData.fullName}
               />
 
               <input
@@ -97,6 +119,8 @@ function Register() {
                 className="border-2 p-3 rounded-lg"
                 placeholder="Email *"
                 onChange={handleChange}
+                value={formData.email}
+                autoComplete="username"
               />
 
               <input
@@ -106,7 +130,10 @@ function Register() {
                 className="border-2 p-3 rounded-lg"
                 placeholder="Password *"
                 onChange={handleChange}
+                value={formData.password}
+                autoComplete="new-password"
               />
+
               <input
                 type="password"
                 {...register("cpassword", { required: true })}
@@ -114,6 +141,8 @@ function Register() {
                 className="border-2 p-3 rounded-lg"
                 placeholder="Confirm Password *"
                 onChange={handleChange}
+                value={formData.cpassword}
+                autoComplete="new-password"
               />
 
               <button className="flex justify-center bg-orange-500 text-white p-3 rounded-sm font-medium">
